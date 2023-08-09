@@ -128,7 +128,8 @@ function gf_collapsible_sections_register_default_open_settings() {
 
 // Callback function for default open sections setting
 function gf_collapsible_sections_default_open_callback() {
-    // Callback function code goes here
+    $default_open_sections = get_option('gf_collapsible_sections_default_open');
+    echo '<input type="text" name="gf_collapsible_sections_default_open" value="' . esc_attr($default_open_sections) . '" />';
 }
 
 // Enqueue scripts and styles
