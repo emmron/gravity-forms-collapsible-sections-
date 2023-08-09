@@ -126,15 +126,7 @@ function gf_collapsible_sections_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'gf_collapsible_sections_enqueue_scripts');
 // Register settings for image and section title
-add_action('admin_init', 'gf_collapsible_sections_register_settings');
-function gf_collapsible_sections_register_settings() {
-    register_setting('gf_collapsible_sections_settings', 'gf_collapsible_sections_image_setting');
-    register_setting('gf_collapsible_sections_settings', 'gf_collapsible_sections_section_title_setting');
-}
-
-// Add settings fields for image and section title
-add_settings_field('gf_collapsible_sections_image_setting', 'Section Image', 'gf_collapsible_sections_image_setting_callback', 'gf_collapsible_sections_settings', 'gf_collapsible_sections_settings_section');
-add_settings_field('gf_collapsible_sections_section_title_setting', 'Section Title', 'gf_collapsible_sections_section_title_setting_callback', 'gf_collapsible_sections_settings', 'gf_collapsible_sections_settings_section');
+// Removed the second declaration of the function
 
 // Callback functions for rendering the input fields for image and section title settings
 function gf_collapsible_sections_image_setting_callback() {
