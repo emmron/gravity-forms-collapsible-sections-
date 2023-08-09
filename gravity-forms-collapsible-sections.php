@@ -11,46 +11,26 @@
 
 GFForms::include_addon_framework();
 
-class GF_Collapsible_Section_Start extends GF_Field {
-    public $type = 'section_start';
+class GF_Collapsible_Section extends GF_Field {
+    public $type = 'collapsible_section';
 
     public function get_form_editor_field_title() {
-        return esc_attr__('Section Start', 'gravityforms');
+        return esc_attr__('Collapsible Section', 'gravityforms');
     }
 
     public function get_form_editor_field_settings() {
-        return array('image_setting');
+        return array('image_setting', 'section_title_setting');
     }
 
-    
 public function get_field_input($form, $value = '', $entry = null) {
     $image_url = $this->image_setting ? esc_url($this->image_setting) : '';
     $image_html = $image_url ? '<img src="' . $image_url . '" alt="Section Image" />' : '';
-    $section_title = $this->label ? esc_html($this->label) : 'Section Start';
-    return '<div class="gf-section-start">' . $image_html . '<h3>' . $section_title . '</h3></div>';
+    $section_title = $this->section_title_setting ? esc_html($this->section_title_setting) : 'Section';
+    return '<div class="gf-collapsible-section">' . $image_html . '<h3>' . $section_title . '</h3></div>';
 }
 
 }
-GF_Fields::register(new GF_Collapsible_Section_Start());
-
-class GF_Collapsible_Section_End extends GF_Field {
-    public $type = 'section_end';
-
-    public function get_form_editor_field_title() {
-        return esc_attr__('Section End', 'gravityforms');
-    }
-
-    
-public function get_field_input($form, $value = '', $entry = null) {
-    $image_url = $this->image_setting ? esc_url($this->image_setting) : '';
-    $image_html = $image_url ? '<img src="' . $image_url . '" alt="Section Image" />' : '';
-    $section_title = $this->label ? esc_html($this->label) : 'Section Start';
-    return '<div class="gf-section-start">' . $image_html . '<h3>' . $section_title . '</h3></div>';
-}
-
-}
-GF_Fields::register(new GF_Collapsible_Section_End());
-
+GF_Fields::register(new GF_Collapsible_Section());
 // Registering image setting
 add_action('gform_field_standard_settings', 'add_image_setting', 10, 2);
 function add_image_setting($position, $form_id) {
