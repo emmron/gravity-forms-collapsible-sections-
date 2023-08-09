@@ -38,8 +38,6 @@ class GF_Collapsible_Section extends GF_Field {
 
 add_action('gform_field_standard_settings', array('GF_Collapsible_Section', 'add_section_title_setting'), 10, 2);
 
-}
-
 public function get_field_input($form, $value = '', $entry = null) {
     $image_url = get_option('gf_collapsible_sections_image_setting') ? esc_url(get_option('gf_collapsible_sections_image_setting')) : '';
     $image_html = $image_url ? '<img src="' . $image_url . '" alt="Section Image" />' : '';
