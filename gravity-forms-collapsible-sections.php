@@ -22,9 +22,7 @@ class GF_Collapsible_Section extends GF_Field {
         return array('image_setting', 'section_title_setting');
     }
 
-    // Registering section title setting
-    add_action('gform_field_standard_settings', 'add_section_title_setting', 10, 2);
-    function add_section_title_setting($position, $form_id) {
+    public function add_section_title_setting($position, $form_id) {
         if ($position == 25) {
             ?>
             <li class="section_title_setting field_setting">
@@ -36,6 +34,9 @@ class GF_Collapsible_Section extends GF_Field {
             <?php
         }
     }
+}
+
+add_action('gform_field_standard_settings', array('GF_Collapsible_Section', 'add_section_title_setting'), 10, 2);
 
 public function get_field_input($form, $value = '', $entry = null) {
     $image_url = get_option('gf_collapsible_sections_image_setting') ? esc_url(get_option('gf_collapsible_sections_image_setting')) : '';
