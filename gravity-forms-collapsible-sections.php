@@ -128,11 +128,12 @@ function gf_collapsible_sections_register_default_open_settings() {
 
 // Callback function for default open sections setting
 function gf_collapsible_sections_default_open_callback() {
+    // Callback function code goes here
+}
 
 // Enqueue scripts and styles
+function gf_collapsible_sections_enqueue_scripts() {
     wp_enqueue_script('gf-collapsible-sections-js', plugin_dir_url(__FILE__) . 'collapsible-sections.js', array('jquery'), '1.0.0', true);
     wp_enqueue_style('gf-collapsible-sections-css', plugin_dir_url(__FILE__) . 'collapsible-sections.css', array(), '1.0.0');
-
-
-// Add action hook for enqueuing scripts and styles
+}
 add_action('wp_enqueue_scripts', 'gf_collapsible_sections_enqueue_scripts');
