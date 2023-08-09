@@ -78,7 +78,11 @@ function gf_collapsible_sections_page() {
 }
 
 
-add_settings_section('gf_collapsible_sections_scroll_section', 'Scroll Settings', 'gf_collapsible_sections_scroll_section_callback', 'gf_collapsible_sections');
+add_action('admin_init', 'gf_collapsible_sections_add_settings_section');
+
+function gf_collapsible_sections_add_settings_section() {
+    add_settings_section('gf_collapsible_sections_scroll_section', 'Scroll Settings', 'gf_collapsible_sections_scroll_section_callback', 'gf_collapsible_sections');
+}
 
 // Callback function for scroll settings section description
 function gf_collapsible_sections_scroll_section_callback() {
