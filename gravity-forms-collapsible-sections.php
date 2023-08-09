@@ -107,12 +107,10 @@ function gf_collapsible_sections_default_open_section_callback() {
 }
 
 // Updating the default open sections field to use the new section
-add_settings_field('gf_collapsible_sections_default_open', 'Default Open Sections', 'gf_collapsible_sections_default_open_callback', 'gf_collapsible_sections', 'gf_collapsible_sections_default_open_section');
-
 add_action('admin_init', 'gf_collapsible_sections_register_default_open_settings');
 function gf_collapsible_sections_register_default_open_settings() {
     register_setting('gf_collapsible_sections_settings', 'gf_collapsible_sections_default_open');
-    add_settings_field('gf_collapsible_sections_default_open', 'Default Open Sections', 'gf_collapsible_sections_default_open_callback', 'gf_collapsible_sections', 'gf_collapsible_sections_scroll_section');
+    add_settings_field('gf_collapsible_sections_default_open', 'Default Open Sections', 'gf_collapsible_sections_default_open_callback', 'gf_collapsible_sections', 'gf_collapsible_sections_default_open_section');
 }
 
 // Callback function for default open sections setting
