@@ -3,8 +3,8 @@
  * Plugin Name: Gravity Forms Collapsible Sections
  * Description: A plugin to add collapsible sections in Gravity Forms with additional features like images and scroll control.
  * Version: 1.0
- * Author: Your Name
- * Author URI: http://yourwebsite.com
+ * Author: Emmett G Hoolahan
+ * Author URI: http://www.ordinaryagency.com.au
  */
 
 // Hook for adding admin menus, scripts, styles, and other initialization code goes here
