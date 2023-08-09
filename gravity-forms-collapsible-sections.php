@@ -22,6 +22,21 @@ class GF_Collapsible_Section extends GF_Field {
         return array('image_setting', 'section_title_setting');
     }
 
+    // Registering section title setting
+    add_action('gform_field_standard_settings', 'add_section_title_setting', 10, 2);
+    function add_section_title_setting($position, $form_id) {
+        if ($position == 25) {
+            ?>
+            <li class="section_title_setting field_setting">
+                <label for="field_section_title">
+                    <?php esc_html_e('Section Title', 'gravityforms'); ?>
+                    <input type="text" id="field_section_title" class="fieldwidth-3" size="35" />
+                </label>
+            </li>
+            <?php
+        }
+    }
+
 public function get_field_input($form, $value = '', $entry = null) {
     $image_url = $this->image_setting ? esc_url($this->image_setting) : '';
     $image_html = $image_url ? '<img src="' . $image_url . '" alt="Section Image" />' : '';
