@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Gravity Forms Collapsible Sections
  * Description: A plugin to add collapsible sections in Gravity Forms with additional features like images and scroll control.
- * Version: 1.0
+ * Version: 2.0
  * Author: Emmett G Hoolahan
  * Author URI: http://www.ordinaryagency.com.au
  */
@@ -38,9 +38,9 @@ class GF_Collapsible_Section extends GF_Field {
     }
 
 public function get_field_input($form, $value = '', $entry = null) {
-    $image_url = $this->image_setting ? esc_url($this->image_setting) : '';
+    $image_url = get_option('gf_collapsible_sections_image_setting') ? esc_url(get_option('gf_collapsible_sections_image_setting')) : '';
     $image_html = $image_url ? '<img src="' . $image_url . '" alt="Section Image" />' : '';
-    $section_title = $this->section_title_setting ? esc_html($this->section_title_setting) : 'Section';
+    $section_title = get_option('gf_collapsible_sections_section_title_setting') ? esc_html(get_option('gf_collapsible_sections_section_title_setting')) : 'Section';
     return '<div class="gf-collapsible-section">' . $image_html . '<h3>' . $section_title . '</h3></div>';
 }
 
@@ -67,6 +67,21 @@ add_action('admin_menu', 'gf_collapsible_sections_menu');
 // Action for admin menu
 function gf_collapsible_sections_menu() {
     add_menu_page('Gravity Forms Collapsible Sections', 'Collapsible Sections', 'manage_options', 'gf_collapsible_sections', 'gf_collapsible_sections_page');
+    add_submenu_page('gf_collapsible_sections', 'Settings', 'Settings', 'manage_options', 'gf_collapsible_sections_settings', 'gf_collapsible_sections_settings_page');
+}
+
+// Function to display the settings page
+function gf_collapsible_sections_settings_page() {
+    ?>
+    <div class="wrap">
+        <h2>Gravity Forms Collapsible Sections Settings</h2>
+        <form method="post" action="options.php">
+            <?php settings_fields('gf_collapsible_sections_settings'); ?>
+            <?php do_settings_sections('gf_collapsible_sections_settings'); ?>
+            <?php submit_button(); ?>
+        </form>
+    </div>
+    <?php
 }
 
 // Function to display the plugin admin page
@@ -133,3 +148,24 @@ function gf_collapsible_sections_enqueue_scripts() {
     wp_enqueue_style('gf-collapsible-sections-css', plugin_dir_url(__FILE__) . 'collapsible-sections.css', array(), '1.0.0');
 }
 add_action('wp_enqueue_scripts', 'gf_collapsible_sections_enqueue_scripts');
+// Register settings for image and section title
+add_action('admin_init', 'gf_collapsible_sections_register_settings');
+function gf_collapsible_sections_register_settings() {
+    register_setting('gf_collapsible_sections_settings', 'gf_collapsible_sections_image_setting');
+    register_setting('gf_collapsible_sections_settings', 'gf_collapsible_sections_section_title_setting');
+}
+
+// Add settings fields for image and section title
+add_settings_field('gf_collapsible_sections_image_setting', 'Section Image', 'gf_collapsible_sections_image_setting_callback', 'gf_collapsible_sections_settings', 'gf_collapsible_sections_settings_section');
+add_settings_field('gf_collapsible_sections_section_title_setting', 'Section Title', 'gf_collapsible_sections_section_title_setting_callback', 'gf_collapsible_sections_settings', 'gf_collapsible_sections_settings_section');
+
+// Callback functions for rendering the input fields for image and section title settings
+function gf_collapsible_sections_image_setting_callback() {
+    $image_setting = get_option('gf_collapsible_sections_image_setting');
+    echo '<input type="text" name="gf_collapsible_sections_image_setting" value="' . esc_attr($image_setting) . '" />';
+}
+
+function gf_collapsible_sections_section_title_setting_callback() {
+    $section_title_setting = get_option('gf_collapsible_sections_section_title_setting');
+    echo '<input type="text" name="gf_collapsible_sections_section_title_setting" value="' . esc_attr($section_title_setting) . '" />';
+}
