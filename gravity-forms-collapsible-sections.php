@@ -38,32 +38,7 @@ class GF_Collapsible_Section extends GF_Field {
 
 add_action('gform_field_standard_settings', array('GF_Collapsible_Section', 'add_section_title_setting'), 10, 2);
 
-class GF_Collapsible_Section extends GF_Field {
-    // ... existing code ...
-
-    public function get_field_input($form, $value = '', $entry = null) {
-        $image_url = get_option('gf_collapsible_sections_image_setting') ? esc_url(get_option('gf_collapsible_sections_image_setting')) : '';
-        $image_html = $image_url ? '<img src="' . $image_url . '" alt="Section Image" />' : '';
-        $section_title = get_option('gf_collapsible_sections_section_title_setting') ? esc_html(get_option('gf_collapsible_sections_section_title_setting')) : 'Section';
-        return '<div class="gf-collapsible-section">' . $image_html . '<h3>' . $section_title . '</h3></div>';
-    }
-}
-
-GF_Fields::register(new GF_Collapsible_Section());
-// Registering image setting
-add_action('gform_field_standard_settings', 'add_image_setting', 10, 2);
-function add_image_setting($position, $form_id) {
-    if ($position == 25) {
-        ?>
-        <li class="image_setting field_setting">
-            <label for="field_image">
-                <?php esc_html_e('Section Image', 'gravityforms'); ?>
-                <input type="text" id="field_image" class="fieldwidth-3" size="35" />
-            </label>
-        </li>
-        <?php
-    }
-}
+// Removed duplicate class declaration and action
 
 // Hook for adding admin menus
 add_action('admin_menu', 'gf_collapsible_sections_menu');
