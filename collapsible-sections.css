@@ -1,0 +1,16 @@
+
+.gf-section-start {
+    cursor: pointer;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.gf-section-start h3 {
+    margin: 0;
+}
+
+.gf-section-end {
+    display: none; /* Hide by default */
+}
+    
